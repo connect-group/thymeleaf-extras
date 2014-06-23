@@ -10,7 +10,7 @@ Include the latest release from Maven,
 		<dependency>
 			<groupId>com.connect-group</groupId>
 			<artifactId>thymeleaf-extras</artifactId>
-			<version>1.0.2</version>
+			<version>1.0.0</version>
 		</dependency>
 
 
