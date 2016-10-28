@@ -1,0 +1,24 @@
+%TEMPLATE_MODE HTML5
+# ------------ separator comment -----------
+%CONTEXT
+newText = 'Hello'
+# ------------------------------------------
+%MESSAGES
+# ------------------------------------------
+%INPUT
+<!DOCTYPE html>
+<html>
+  <body>
+    <p class="icon-then-text" xtra:utext-after="${newText}"><i class="icon"></i>Text after icon</p>
+    <p class="mixedcontent" xtra:utext-after="${newText}">Hi<span>span1</span><span>span2</span>TextAtEnd</p>
+  </body>
+</html>
+# ------------------------------------------
+%OUTPUT
+<!DOCTYPE html>
+<html>
+  <body>
+    <p class="icon-then-text" ><i class="icon"></i>Hello</p>
+    <p class="mixedcontent">Hi<span>span1</span><span>span2</span>Hello</p>
+  </body>
+</html>
