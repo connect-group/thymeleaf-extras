@@ -9,8 +9,8 @@ import java.util.List;
 
 final class StripWhiteSpaceHTMLProcessor extends AbstractTextModifierProcessor {
 
-    public static final String ATTRIBUTE_NAME = "strip-whitespace";
-    public static final String DEEP_ATTRIBUTE_VALUE = "deep";
+    private static final String ATTRIBUTE_NAME = "strip-whitespace";
+    private static final String DEEP_ATTRIBUTE_VALUE = "deep";
 
     protected StripWhiteSpaceHTMLProcessor(final String dialectPrefix, final int precedence) {
         super(TemplateMode.HTML, dialectPrefix, ATTRIBUTE_NAME, precedence);

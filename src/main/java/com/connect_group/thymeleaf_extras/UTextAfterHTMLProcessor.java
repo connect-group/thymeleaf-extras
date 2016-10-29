@@ -6,7 +6,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 final class UTextAfterHTMLProcessor extends AbstractTextModifierProcessor {
 
-    public static final String ATTRIBUTE_NAME = "utext-after";
+    private static final String ATTRIBUTE_NAME = "utext-after";
 
     public UTextAfterHTMLProcessor(String dialectPrefix, int precedence) {
         super(TemplateMode.HTML, dialectPrefix, ATTRIBUTE_NAME, precedence);

@@ -18,7 +18,7 @@ public class ThymeleafExtrasDialect extends AbstractProcessorDialect {
     }
 
     public Set<IProcessor> getProcessors(String dialectPrefix) {
-        final HashSet<IProcessor> processors = new HashSet<IProcessor>();
+        final HashSet<IProcessor> processors = new HashSet<>();
         processors.add(new UTextAfterHTMLProcessor(PREFIX, getDialectProcessorPrecedence()));
         processors.add(new UTextBeforeHTMLProcessor(PREFIX, getDialectProcessorPrecedence()));
         processors.add(new StripWhiteSpaceHTMLProcessor(PREFIX, getDialectProcessorPrecedence()));

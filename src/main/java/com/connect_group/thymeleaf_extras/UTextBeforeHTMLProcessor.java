@@ -6,7 +6,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 final class UTextBeforeHTMLProcessor extends AbstractTextModifierProcessor {
 
-    public static final String ATTRIBUTE_NAME = "utext-before";
+    private static final String ATTRIBUTE_NAME = "utext-before";
 
     public UTextBeforeHTMLProcessor(String dialectPrefix, int precedence) {
         super(TemplateMode.HTML, dialectPrefix, ATTRIBUTE_NAME, precedence);
