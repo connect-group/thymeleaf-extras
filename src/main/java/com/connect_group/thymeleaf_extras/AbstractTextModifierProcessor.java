@@ -13,11 +13,11 @@ import org.thymeleaf.standard.expression.IStandardExpressionParser;
 import org.thymeleaf.standard.expression.StandardExpressions;
 import org.thymeleaf.templatemode.TemplateMode;
 
-abstract class AbstractUTextModifierProcessor extends AbstractAttributeModelProcessor {
+abstract class AbstractTextModifierProcessor extends AbstractAttributeModelProcessor {
 
     private final TemplateMode templateMode;
 
-    protected AbstractUTextModifierProcessor(final TemplateMode templateMode, final String dialectPrefix, final String attributeName, final int precedence) {
+    protected AbstractTextModifierProcessor(final TemplateMode templateMode, final String dialectPrefix, final String attributeName, final int precedence) {
         super(templateMode, dialectPrefix, null, false, attributeName, true, precedence, true);
         this.templateMode = templateMode;
     }

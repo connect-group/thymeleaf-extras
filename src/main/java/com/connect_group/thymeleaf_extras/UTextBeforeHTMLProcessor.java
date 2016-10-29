@@ -4,11 +4,11 @@ import org.thymeleaf.model.IModel;
 import org.thymeleaf.model.IText;
 import org.thymeleaf.templatemode.TemplateMode;
 
-final class UTextBeforeModifierHTMLProcessor extends AbstractUTextModifierProcessor {
+final class UTextBeforeHTMLProcessor extends AbstractTextModifierProcessor {
 
     public static final String ATTRIBUTE_NAME = "utext-before";
 
-    public UTextBeforeModifierHTMLProcessor(String dialectPrefix, int precedence) {
+    public UTextBeforeHTMLProcessor(String dialectPrefix, int precedence) {
         super(TemplateMode.HTML, dialectPrefix, ATTRIBUTE_NAME, precedence);
     }
 

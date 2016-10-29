@@ -1,0 +1,46 @@
+%TEMPLATE_MODE HTML5
+%EXACT_MATCH true
+# ------------ separator comment -----------
+%CONTEXT
+list = new java.lang.String[]{"first" , "second"}
+# ------------------------------------------
+%MESSAGES
+# ------------------------------------------
+%INPUT
+<!DOCTYPE html>
+<html>
+  <body>
+    <section xtra:strip-whitespace="deep">
+        <div class="el">
+            <p>Some text</p>
+        </div>
+        <div class="el">
+            <p>Some more text</p>
+        </div>
+    </section>
+    <article xtra:strip-whitespace="shallow">
+        <div>
+            <p>Potato!</p>
+        </div>
+    </article>
+    <ul xtra:strip-whitespace="deep">
+        <li th:each="text : ${list}" th:text="${text}">Hello</li>
+    </ul>
+    <ul xtra:strip-whitespace="shallow">
+        <li th:each="item : ${list}">Element</li>
+    </ul>
+  </body>
+</html>
+# ------------------------------------------
+%OUTPUT
+<!DOCTYPE html>
+<html>
+  <body>
+    <section><div class="el"><p>Some text</p></div><div class="el"><p>Some more text</p></div></section>
+    <article><div>
+            <p>Potato!</p>
+        </div></article>
+    <ul><li>first</li><li>second</li></ul>
+    <ul><li>Element</li><li>Element</li></ul>
+  </body>
+</html>

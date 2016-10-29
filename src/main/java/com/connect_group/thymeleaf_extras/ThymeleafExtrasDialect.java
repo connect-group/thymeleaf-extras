@@ -9,17 +9,19 @@ import java.util.Set;
 public class ThymeleafExtrasDialect extends AbstractProcessorDialect {
 
 
-    public static final String PREFIX = "xtra";
-    public static final int PROCESSOR_PRECEDENCE = 1500;
+    private static final String PREFIX = "xtra";
+    private static final int PROCESSOR_PRECEDENCE = 1500;
+    private static final String DIALECT_NAME = "extras-dialect";
 
-    protected ThymeleafExtrasDialect() {
-        super("extras-dialect", PREFIX, PROCESSOR_PRECEDENCE);
+    public ThymeleafExtrasDialect() {
+        super(DIALECT_NAME, PREFIX, PROCESSOR_PRECEDENCE);
     }
 
     public Set<IProcessor> getProcessors(String dialectPrefix) {
         final HashSet<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new UTextAfterModifierHTMLProcessor(PREFIX, PROCESSOR_PRECEDENCE));
-        processors.add(new UTextBeforeModifierHTMLProcessor(PREFIX, PROCESSOR_PRECEDENCE));
+        processors.add(new UTextAfterHTMLProcessor(PREFIX, getDialectProcessorPrecedence()));
+        processors.add(new UTextBeforeHTMLProcessor(PREFIX, getDialectProcessorPrecedence()));
+        processors.add(new StripWhiteSpaceHTMLProcessor(PREFIX, getDialectProcessorPrecedence()));
         return processors;
     }
 }

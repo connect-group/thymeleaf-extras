@@ -4,11 +4,11 @@ import org.thymeleaf.model.IModel;
 import org.thymeleaf.model.IText;
 import org.thymeleaf.templatemode.TemplateMode;
 
-final class UTextAfterModifierHTMLProcessor extends AbstractUTextModifierProcessor {
+final class UTextAfterHTMLProcessor extends AbstractTextModifierProcessor {
 
     public static final String ATTRIBUTE_NAME = "utext-after";
 
-    public UTextAfterModifierHTMLProcessor(String dialectPrefix, int precedence) {
+    public UTextAfterHTMLProcessor(String dialectPrefix, int precedence) {
         super(TemplateMode.HTML, dialectPrefix, ATTRIBUTE_NAME, precedence);
     }
 

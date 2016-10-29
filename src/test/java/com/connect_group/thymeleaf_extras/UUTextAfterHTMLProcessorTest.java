@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
-public class UTextAfterModifierHTMLProcessorTest {
+public class UUTextAfterHTMLProcessorTest {
 
     @Test
     public void runTest() {
