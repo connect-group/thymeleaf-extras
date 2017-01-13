@@ -38,7 +38,8 @@ abstract class AbstractTextModifierProcessor extends AbstractAttributeModelProce
     private String getEvaluatedAttributeValue(ITemplateContext context, String attributeValue) {
         IStandardExpressionParser expressionParser = StandardExpressions.getExpressionParser(context.getConfiguration());
         IStandardExpression expression = expressionParser.parseExpression(context, attributeValue);
-        return expression.execute(context).toString();
+        Object execute = expression.execute(context);
+        return execute == null ? "" : execute.toString();
     }
 
     private IModelFactory getModelFactory(ITemplateContext context) {

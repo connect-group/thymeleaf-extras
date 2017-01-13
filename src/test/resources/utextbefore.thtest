@@ -13,6 +13,7 @@ textWithElement = '<span>Hello</span>'
     <p class="text-then-icon" xtra:utext-before="${newText}">Original Text<i class="icon"></i></p>
     <p class="text-with-comment" xtra:utext-before="${newText}"><!-- comment -->Original Text<!-- comment2 --><i class="icon"></i></p>
     <p class="no-text-then-icon" xtra:utext-before="${textWithElement}"><i class="icon"></i></p>
+    <p class="no-text-then-icon" xtra:utext-before="${nullElement}"><i class="icon"></i></p>
   </body>
 </html>
 # ------------------------------------------
@@ -23,5 +24,6 @@ textWithElement = '<span>Hello</span>'
     <p class="text-then-icon">Hello<i class="icon"></i></p>
     <p class="text-with-comment"><!-- comment -->Hello<!-- comment2 --><i class="icon"></i></p>
     <p class="no-text-then-icon"><span>Hello</span><i class="icon"></i></p>
+        <p class="no-text-then-icon"><i class="icon"></i></p>
   </body>
 </html>
