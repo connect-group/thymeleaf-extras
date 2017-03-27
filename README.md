@@ -1,7 +1,7 @@
 thymeleaf-extras
 ================
 
-Thymeleaf dialect with useful re-usable attribute processors such as xtra:utext-before and xtra:utext-after; compatible with both Thymeleaf and Thymesheet.
+Thymeleaf 2 & 3 dialect with useful re-usable attribute processors such as xtra:utext-before and xtra:utext-after; compatible with both Thymeleaf and Thymesheet.
 
 ## Maven
 
@@ -13,6 +13,13 @@ Include the latest release from Maven,
 			<version>1.0.0</version>
 		</dependency>
 
+Or for Thymeleaf 3, contributed by jegoossens,
+
+		<dependency>
+			<groupId>com.connect-group</groupId>
+			<artifactId>thymeleaf-extras</artifactId>
+			<version>2.0.1</version>
+		</dependency>
 
 xtra:utext-before
 -----------------
