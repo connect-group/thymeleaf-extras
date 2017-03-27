@@ -1,61 +1,49 @@
 package com.connect_group.thymeleaf_extras;
 
-import org.thymeleaf.Arguments;
-import org.thymeleaf.Configuration;
-import org.thymeleaf.dom.Element;
-import org.thymeleaf.dom.Macro;
-import org.thymeleaf.dom.Node;
-import org.thymeleaf.processor.attr.AbstractChildrenModifierAttrProcessor;
+import org.thymeleaf.context.ITemplateContext;
+import org.thymeleaf.engine.AttributeName;
+import org.thymeleaf.engine.StandardModelFactory;
+import org.thymeleaf.model.IModel;
+import org.thymeleaf.model.IModelFactory;
+import org.thymeleaf.model.IText;
+import org.thymeleaf.processor.element.AbstractAttributeModelProcessor;
+import org.thymeleaf.processor.element.IElementModelStructureHandler;
 import org.thymeleaf.standard.expression.IStandardExpression;
 import org.thymeleaf.standard.expression.IStandardExpressionParser;
-import org.thymeleaf.standard.expression.StandardExpressionExecutionContext;
 import org.thymeleaf.standard.expression.StandardExpressions;
+import org.thymeleaf.templatemode.TemplateMode;
 
-import java.util.List;
+abstract class AbstractTextModifierProcessor extends AbstractAttributeModelProcessor {
 
-public abstract class AbstractTextModifierProcessor extends AbstractChildrenModifierAttrProcessor {
-    protected AbstractTextModifierProcessor(String attrName) {
-        super(attrName);
+    private final TemplateMode templateMode;
+
+    protected AbstractTextModifierProcessor(final TemplateMode templateMode, final String dialectPrefix, final String attributeName, final int precedence) {
+        super(templateMode, dialectPrefix, null, false, attributeName, true, precedence, true);
+        this.templateMode = templateMode;
     }
 
     @Override
-    protected List<Node> getModifiedChildren(Arguments arguments, Element element, String attributeName) {
-        final Node newText = getTextNode(arguments, element, attributeName);
-        List<Node> originalChildNodes = element.getChildren();
-        List<Node> newNodes = removeRequiredTextNodes(originalChildNodes);
-        addNewTextNodeToList(newNodes, newText);
-        return newNodes;
+    protected void doProcess(ITemplateContext context, IModel model, AttributeName attributeName, String attributeValue, IElementModelStructureHandler structureHandler) {
+        doProcess(model, getAttributeValueAsEvent(context, attributeValue));
     }
 
-    protected abstract void addNewTextNodeToList(List<Node> newNodes, Node newText);
+    abstract void doProcess(IModel model, IText attributeValue);
 
-    protected abstract List<Node> removeRequiredTextNodes(List<Node> originalChildNodes);
-
-    protected final String getText(final Arguments arguments, final Element element, final String attributeName) {
-
-        final String attributeValue = element.getAttributeValue(attributeName);
-
-        final Configuration configuration = arguments.getConfiguration();
-        final IStandardExpressionParser expressionParser = StandardExpressions.getExpressionParser(configuration);
-
-        final IStandardExpression expression = expressionParser.parseExpression(configuration, arguments, attributeValue);
-
-        final Object result =
-                expression.execute(configuration, arguments, StandardExpressionExecutionContext.UNESCAPED_EXPRESSION);
-
-        return (result == null? "" : result.toString());
-
+    private IText getAttributeValueAsEvent(ITemplateContext context, String attributeValue) {
+        String evaluatedAttributeValue = getEvaluatedAttributeValue(context, attributeValue);
+        IModelFactory modelFactory = getModelFactory(context);
+        return modelFactory.createText(evaluatedAttributeValue);
     }
 
-    protected final Node getTextNode(final Arguments arguments, final Element element, final String attributeName) {
-        final String text = getText(arguments, element, attributeName);
-
-        final Macro node = new Macro(text);
-        // Setting this allows avoiding text inliners processing already generated text,
-        // which in turn avoids code injection.
-        node.setProcessable(false);
-
-        return node;
+    private String getEvaluatedAttributeValue(ITemplateContext context, String attributeValue) {
+        IStandardExpressionParser expressionParser = StandardExpressions.getExpressionParser(context.getConfiguration());
+        IStandardExpression expression = expressionParser.parseExpression(context, attributeValue);
+        Object execute = expression.execute(context);
+        return execute == null ? "" : execute.toString();
     }
+
+    private IModelFactory getModelFactory(ITemplateContext context) {
+        return new StandardModelFactory(context.getConfiguration(), templateMode);
+    }
+
 }
-

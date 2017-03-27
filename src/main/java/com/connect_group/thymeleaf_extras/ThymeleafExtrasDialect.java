@@ -1,31 +1,27 @@
 package com.connect_group.thymeleaf_extras;
 
-import org.thymeleaf.dialect.AbstractDialect;
+import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class ThymeleafExtrasDialect extends AbstractDialect {
-    public static final String DIALECT_PREFIX = "xtra";
+public class ThymeleafExtrasDialect extends AbstractProcessorDialect {
 
-    @Override
-    public String getPrefix() {
-        return DIALECT_PREFIX;
+
+    private static final String PREFIX = "xtra";
+    private static final int PROCESSOR_PRECEDENCE = 1500;
+    private static final String DIALECT_NAME = "extras-dialect";
+
+    public ThymeleafExtrasDialect() {
+        super(DIALECT_NAME, PREFIX, PROCESSOR_PRECEDENCE);
     }
 
-    @Override
-    public boolean isLenient() {
-        return false;
-    }
-
-    @Override
-    public Set<IProcessor> getProcessors() {
-        final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new UTextBeforeModifierProcessor());
-        processors.add(new UTextAfterModifierProcessor());
-        processors.add(new InsertUTextBeforeModifierProcessor());
-        processors.add(new StripWhitespaceProcessor());
+    public Set<IProcessor> getProcessors(String dialectPrefix) {
+        final HashSet<IProcessor> processors = new HashSet<>();
+        processors.add(new UTextAfterHTMLProcessor(PREFIX, getDialectProcessorPrecedence()));
+        processors.add(new UTextBeforeHTMLProcessor(PREFIX, getDialectProcessorPrecedence()));
+        processors.add(new StripWhiteSpaceHTMLProcessor(PREFIX, getDialectProcessorPrecedence()));
         return processors;
     }
 }
